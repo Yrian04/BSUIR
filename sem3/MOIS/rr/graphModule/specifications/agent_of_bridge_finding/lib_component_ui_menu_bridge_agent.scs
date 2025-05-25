@@ -1,0 +1,9 @@
+lib_component_ui_menu_bridge_agent
+=> nrel_main_idtf:
+	[Компонент библиотеки. Моя команда пользовательского интерфейса]
+	(* <- lang_ru;; *);
+	[Library component. My user interfaces command]
+	(* <- lang_en;; *);
+
+<- library_of_platform_independent_reusable_components;
+<- library_of_atomic_reusable_components;;

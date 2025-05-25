@@ -1,0 +1,41 @@
+# Основные файлы Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Виртуальное окружение
+venv/
+.venv/
+env/
+.venv/
+venv/bin/
+venv/lib/
+
+# Файлы логов и временные
+*.log
+*.tmp
+*.swp
+*.bak
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Файлы IDE/редакторы
+*.suo
+*.sln.docstates
+.idea/
+.vscode/
+
+# Данные проекта (если не нужно версионировать)
+data/
+output/
+img/  # Если картинки не часть проекта
+
+# Остальные файлы
+*.egg-info/
+dist/
+build/
+*.egg/

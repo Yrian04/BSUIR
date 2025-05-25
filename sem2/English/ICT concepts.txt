@@ -1,0 +1,22 @@
+Information and communication technologies (ICT) are a set of technologies developed to enhance the effectiveness of information use and improve communication. Terms data and information are different in professional terminology. Data is used by machines, such as computers, information is used by humans.
+
+There are some types of computer:
+	Desktop PC – the typical computer use for business and home using;
+	Laptop – a lightweight computer that you can transport easily;
+	Tablet PC – personal pc, which looks like a book;
+	PDA – a tiny computer that you can hold in one hand;
+	Wearable computer – computer that you can wear;
+	Mainframe
+
+Computer have three basic component:
+	The CPU – a microprocessor chip which used for process data and coordinate activities of other chips;
+	The main memory – holds the instructions and data which are being processed by the CPU. Have a two main sections: RAM(Random Access Memory) and ROM(Read Only Memory);
+	Peripherals – the physical units attached to the computer.
+
+A data storage system has two main components: a storage medium and a storage device. There 3 storage technologies:
+1.	Magnetic storage technology.
+2.	Optical storage technology.
+3.	Solid state storage or flash memory.
+
+
+Electronic waste from old computers and mobile phones can cause severe environmental and public health problems. To deal with this problem we should recycle ICT equipment.

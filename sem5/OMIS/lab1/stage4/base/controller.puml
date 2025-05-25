@@ -1,0 +1,56 @@
+@startuml controller
+abstract class Controller {
+    -HTMLPageFactory: HTMLPageFactory
+}
+note top of Controller : Base controller class implemented by framework
+
+' === Event ===
+
+interface IEventController {
+    +{abstract}createEvent(contex: RequestContex, Event): void
+    +{abstract}joinEvent(contex: RequestContex, Event, User): void
+    +{abstract}getParticipants(contex: RequestContex: Event): void
+    +{abstract}deleteParticipant(contex: RequestContex: Event, User: user): void
+    +{abstract}endEvent(contex: RequestContex, Event): void
+}
+
+class EventController extends Controller implements IEventController {
+    -IEventService service
+    -IUserService service
+    +createEvent(contex: RequestContex, Event): void
+    +joinEvent(contex: RequestContex, Event, User): void
+    +getParticipants(contex: RequestContex: Event): void
+    +deleteParticipant(contex: RequestContex: Event, User: user): void
+    +endEvent(contex: RequestContex, Event): void
+}
+EventController "1" o-- "1" IEventService
+EventController "1" o-- "1" IUserService
+EventController ..> Event: <<use>>
+EventController ..> User: <<use>>
+
+' === Chat ===
+
+interface IChatController {
+    +{abstract}sendMessage(context: RequestContex, message: Message): void
+    +{abstract}deleteMessage(context: RequestContex, message: Message): void
+}
+
+class ChatController extends Controller implements IChatController {
+    -IChatService service
+    +sendMessage(context: RequestContex): void
+    +deleteMessage(context: RequestContex, message: Message): void
+}
+ChatController "1" o-- "1"  IChatService
+ChatController ..> Message: <<use>>
+
+' === Application == 
+
+class Application <<injector>> <<singleton>> {
+	+getRequiredService(type: Class | Interface): object
+}
+Application ..> EventController: <<instantiate>>
+Application ..> EventController: <<call>>
+Application ..> ChatController: <<instantiate>>
+Application ..> ChatController: <<call>>
+note top of Application : DI container implemented by framework
+@enduml

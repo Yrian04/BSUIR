@@ -1,0 +1,25 @@
+lib_component_ui_menu_is_functional = [*
+ui_menu_is_functional <- ui_user_command_class_atom; ui_user_command_class_view_kb; ui_one_argument_command_class;;
+
+ui_menu_is_functional 
+=> nrel_main_idtf: 
+	[Является ли граф функциональным?]
+	(* <- lang_ru;; *);;
+
+ui_menu_is_functional 
+=> nrel_main_idtf: 
+	[Is graph functional?]
+	(* <- lang_en;; *);;
+
+ui_menu_is_functional => ui_nrel_command_template:
+	[*
+		question_is_functional _-> ._question_is_functional_instance
+			(*
+				_-> ui_arg_1;;
+			*);;
+		._question_is_functional_instance _<- question;;
+	*];;
+
+ui_menu_is_functional => ui_nrel_command_lang_template: [Функциональность $ui_arg_1?] (* <- lang_ru;; *);;
+ui_menu_is_functional => ui_nrel_command_lang_template: [Functionality of $ui_arg_1?] (* <- lang_en;; *);;
+*];;

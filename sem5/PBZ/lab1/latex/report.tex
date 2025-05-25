@@ -1,0 +1,554 @@
+\documentclass[a4paper,8pt]{article}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage[T2A]{fontenc}
+\usepackage{float}
+\usepackage{geometry}
+\usepackage{booktabs}
+\geometry{
+  a4paper,
+  top=25mm,
+  right=20mm,
+  bottom=25mm,
+  left=20mm
+}
+
+\title{Отчет по запросам SQL}
+\author{}
+\date{}
+
+\begin{document}
+
+\begin{titlepage}
+  \begin{center}
+    Министерство образования Республики Беларусь\\[1em]
+    Учреждение образования\\
+    БЕЛОРУССКИЙ ГОСУДАРСТВЕННЫЙ УНИВЕРСИТЕТ \\
+    ИНФОРМАТИКИ И РАДИОЭЛЕКТРОНИКИ\\[8em]
+
+    \begin{minipage}{\textwidth}
+      \begin{flushleft}
+        \begin{tabular}{ l l }
+          Факультет & информационных технологий и управления\\
+          Кафедра   & интеллектуальных информационных технологий
+        \end{tabular}
+      \end{flushleft}
+    \end{minipage}\\[8em]
+
+    {Отчёт}\\
+    {по лабораторной работе №1}\\
+    {по дисциплине <<Проектирование баз знаний>>}\\[8em]
+
+    \vspace{2em}
+    \begin{tabular}{ p{0.65\textwidth}p{0.25\textwidth} }
+      Студент гр. 221701 & Е.\,Д.~Глёза \\
+      Проверил & М.\,Г.~Соколович \\
+    \end{tabular}
+    
+    \vfill
+    {\normalsize Минск 2024}
+  \end{center}
+\end{titlepage}
+
+\section{Задание 1}
+
+\subsection{Получить полную информацию обо всех преподавателях.}
+\begin{verbatim}
+select * from teachers;
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_1.tex}
+\caption{Результаты запроса 1.1}
+\end{table}
+
+\subsection{Получить полную информацию обо всех студенческих группах на специальности ЭВМ.}
+\begin{verbatim}
+select * from stud_groups where specialization = "ЭВМ";
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_2.tex}
+\caption{Результаты запроса 1.1}
+\end{table}
+
+\subsection{Получить личный номер преподавателя и номера аудиторий, в которых они преподают предмет с кодовым номером 18П.}
+\begin{verbatim}
+select teacherId, roomNumber from group_subject_teacher where subjectId = 18;
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_3.tex}
+\caption{Результаты запроса 1.1}
+\end{table}
+
+\subsection{Получить номера предметов и названия предметов, которые ведет преподаватель Костин.}
+\begin{verbatim}
+select subjectId, subjects.name from group_subject_teacher
+join subjects on subjects.id = subjectId
+join teachers on teachers.id = teacherId
+where teachers.second_name = "Костин";
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_4.tex}
+\caption{Результаты запроса 1.4}
+\end{table}
+
+\subsection{Получить номер группы, в которой ведутся предметы преподавателем Фроловым.}
+\begin{verbatim}
+select groupId from group_subject_teacher
+join teachers on teachers.id = teacherId
+where teachers.second_name = "Фролов"
+group by groupId;
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_5.tex}
+\caption{Результаты запроса 1.5}
+\end{table}
+
+\subsection{Получить информацию о предметах, которые ведутся на специальности АСОИ.}
+\begin{verbatim}
+select * from subjects where specialization = "АСОИ";
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_6.tex}
+\caption{Результаты запроса 1.6}
+\end{table}
+
+\subsection{Получить информацию о преподавателях, которые ведут предметы на специальности АСОИ.}
+\begin{verbatim}
+select * from teachers where specialization like '%АСОИ%';
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_7.tex}
+\caption{Результаты запроса 1.7}
+\end{table}
+
+\subsection{Получить фамилии преподавателей, которые ведут предметы в 210 аудитории.}
+\begin{verbatim}
+select teachers.second_name from group_subject_teacher
+join teachers on teachers.id = teacherId
+where roomNumber = 210
+group by teachers.second_name;
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_8.tex}
+\caption{Результаты запроса 1.8}
+\end{table}
+
+\subsection{Получить названия предметов и названия групп, которые ведут занятия в аудиториях с 100 по 200.}
+\begin{verbatim}
+select subjects.name, stud_groups.name from group_subject_teacher
+join subjects on subjects.id = subjectId
+join stud_groups on stud_groups.id = groupId
+where roomNumber between 100 and 200
+group by subjects.name, stud_groups.name;
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_9.tex}
+\caption{Результаты запроса 1.9}
+\end{table}
+
+\subsection{Получить пары номеров групп с одной специальности.}
+\begin{verbatim}
+select first.id, second.id from stud_groups as first
+join stud_groups as second on second.specialization = first.specialization;
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_10.tex}
+\caption{Результаты запроса 1.10}
+\end{table}
+
+\subsection{Получить общее количество студентов, обучающихся на специальности ЭВМ.}
+\begin{verbatim}
+select sum(size) from stud_groups where specialization = "ЭВМ";
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_11.tex}
+\caption{Результаты запроса 1.11}
+\end{table}
+
+\subsection{Получить номера преподавателей, обучающих студентов по специальности ЭВМ.}
+\begin{verbatim}
+select teacherId from group_subject_teacher
+join stud_groups on stud_groups.id = groupId
+where stud_groups.specialization = "ЭВМ"
+group by teacherId;
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_12.tex}
+\caption{Результаты запроса 1.12}
+\end{table}
+
+\subsection{Получить номера предметов, изучаемых всеми студенческими группами.}
+\begin{verbatim}
+insert group_subject_teacher value (7, 12, 222, 234);
+
+select id from subjects as s
+where not exists (
+	(select id from stud_groups)
+    except 
+    (select sb.groupId from group_subject_teacher as sb where sb.subjectId = s.id) 
+);
+
+delete from group_subject_teacher 
+where groupId = 7 and subjectId = 12 and teacherId = 222;
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_13.tex}
+\caption{Результаты запроса 1.13}
+\end{table}
+
+\subsection{Получить фамилии преподавателей, преподающих те же предметы, что и преподаватель, преподающий предмет с номером 14П.}
+\begin{verbatim}
+select second_name from teachers as t
+where not exists (
+	(select gst.subjectId from group_subject_teacher as gst 
+    where teacherId in (select gst1.teacherId from group_subject_teacher as gst1 where gst1.subjectId = 14) 
+    )
+    except 
+    (select gst2.subjectId from group_subject_teacher as gst2 where gst2.teacherId = t.id) 
+);
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_14.tex}
+\caption{Результаты запроса 1.14}
+\end{table}
+
+\subsection{Получить информацию о предметах, которые не ведет преподаватель с личным номером 221П.}
+\begin{verbatim}
+select * from subjects
+join group_subject_teacher on group_subject_teacher.subjectId = id
+where not group_subject_teacher.teacherId = 221;
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_15.tex}
+\caption{Результаты запроса 1.15}
+\end{table}
+
+\subsection{Получить информацию о предметах, которые не изучаются в группе М-6.}
+\begin{verbatim}
+select * from subjects
+join group_subject_teacher on group_subject_teacher.subjectId = id
+join stud_groups on stud_groups.id = group_subject_teacher.groupId
+where not stud_groups.name = "M-6";
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_16.tex}
+\caption{Результаты запроса 1.16}
+\end{table}
+
+\subsection{Получить информацию о доцентах, преподающих в группах 3Г и 8}
+\begin{verbatim}
+select teachers.* from teachers
+join group_subject_teacher on group_subject_teacher.teacherId = teachers.id
+join stud_groups on stud_groups.id = group_subject_teacher.groupId
+where stud_groups.name in ("3Г", "8");
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_17.tex}
+\caption{Результаты запроса 1.17}
+\end{table}
+
+\subsection{Получить номера предметов, номера преподавателей, номера групп, в которых ведут занятия преподаватели с кафедры ЭВМ, имеющих специальность АСОИ.}
+\begin{verbatim}
+select subjectId, teacherId, groupId from group_subject_teacher
+join teachers on teachers.id = teacherId
+where teachers.department = "ЭВМ" and specialization like '%АСОИ%';
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_18.tex}
+\caption{Результаты запроса 1.18}
+\end{table}
+
+\subsection{Получить номера групп с такой же специальностью, что и специальность преподавателей.}
+\begin{verbatim}
+select groupId from group_subject_teacher
+join stud_groups on stud_groups.id = groupId
+join teachers on teachers.id = teacherId
+where not locate(stud_groups.specialization, teachers.specialization) = 0
+group by groupId;
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_19.tex}
+\caption{Результаты запроса 1.19}
+\end{table}
+
+\subsection{Получить номера преподавателей с кафедры ЭВМ, преподающих предметы по специальности, совпадающей со специальностью студенческой группы.}
+\begin{verbatim}
+select t.id from (select * from teachers where department = "ЭВМ") as t
+join group_subject_teacher on group_subject_teacher.teacherId = t.id
+join stud_groups on stud_groups.id = group_subject_teacher.groupId
+where not locate(stud_groups.specialization, t.specialization) = 0;
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_20.tex}
+\caption{Результаты запроса 1.20}
+\end{table}
+
+\subsection{Получить специальности студенческой группы, на которых работают преподаватели кафедры АСУ.}
+\begin{verbatim}
+select stud_groups.specialization from stud_groups
+join group_subject_teacher on group_subject_teacher.groupId = stud_groups.id
+join teachers on teachers.id = group_subject_teacher.teacherId
+where teachers.department = "АСУ";
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_21.tex}
+\caption{Результаты запроса 1.21}
+\end{table}
+
+\subsection{Получить номера предметов, изучаемых группой АС-8.}
+\begin{verbatim}
+select subjects.id from subjects
+join group_subject_teacher on group_subject_teacher.subjectId = subjects.id
+join stud_groups on stud_groups.id = group_subject_teacher.groupId
+where stud_groups.name = "АС-8";
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_22.tex}
+\caption{Результаты запроса 1.22}
+\end{table}
+
+\subsection{Получить номера студенческих групп, которые изучают те же предметы, что и студенческая группа АС-8.}
+\begin{verbatim}
+select g.id from stud_groups as g
+where not exists (
+	(
+		select s1.id from subjects as s1
+		join group_subject_teacher as gst1 on gst1.subjectId = s1.id
+		join stud_groups as g1 on g1.id = gst1.groupId
+		where g1.name = "АС-8"
+    )
+    except 
+    (
+		select s2.id from subjects as s2
+		join group_subject_teacher as gst2 on gst2.subjectId = s2.id
+		join stud_groups as g2 on g2.id = gst2.groupId
+		where g2.id = g.id
+    )
+);
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_23.tex}
+\caption{Результаты запроса 1.23}
+\end{table}
+
+\subsection{Получить номера студенческих групп, которые не изучают предметы, преподаваемые в студенческой группе АС-8.}
+\begin{verbatim}
+delete from group_subject_teacher 
+where groupId = 3 and subjectId = 12;
+
+select distinct gst.groupId from group_subject_teacher as gst
+where not exists (
+	select gst1.subjectId from group_subject_teacher as gst1
+    where gst1.groupId = gst.groupId and gst1.subjectId in (
+		select gst2.subjectId from group_subject_teacher as gst2
+        join stud_groups as g2 on g2.id = gst2.groupId
+        where g2.name = "АС-8"
+    )
+);
+
+insert group_subject_teacher value (3, 12, 222, 112);
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_24.tex}
+\caption{Результаты запроса 1.24}
+\end{table}
+
+\subsection{Получить номера студенческих групп, которые не изучают предметы, преподаваемые преподавателем 430Л.}
+\begin{verbatim}
+select distinct gst.groupId from group_subject_teacher as gst
+where not exists (
+	select gst1.subjectId from group_subject_teacher as gst1
+    where gst1.groupId = gst.groupId and gst1.subjectId in (
+		select gst2.subjectId from group_subject_teacher as gst2
+        where gst2.teacherId = 430
+    )
+);
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_25.tex}
+\caption{Результаты запроса 1.25}
+\end{table}
+
+\subsection{Получить номера преподавателей, работающих с группой Э-15, но не преподающих предмет 12П.}
+\begin{verbatim}
+select gst.teacherId from group_subject_teacher as gst
+join stud_groups as g on g.id = gst.groupId
+where g.name = "Э-15" and 12 not in (
+	select gst1.subjectId from group_subject_teacher as gst1
+    where gst1.teacherId = gst.teacherId
+);
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task1_26.tex}
+\caption{Результаты запроса 1.26}
+\end{table}
+
+\section{Запросы}
+
+\subsection{Получить номера поставщиков, поставляющих одну и ту же деталь для всех проектов.}
+\begin{verbatim}
+select supplierId from suppliers_parts_projects
+group by supplierId
+having count(distinct partId) = 1;
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task2_31.tex}
+\caption{Результаты запроса 2.31}
+\end{table}
+
+\subsection{Получить номера деталей, поставляемых для всех проектов, обеспечиваемых поставщиком из того же города, где размещен проект.}
+\begin{verbatim}
+select partId from suppliers_parts_projects
+join suppliers on supplierId = suppliers.id
+join projects on projectId = projects.id
+where suppliers.location = projects.location
+group by partId;
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task2_12.tex}
+\caption{Результаты запроса 2.12}
+\end{table}
+
+\subsection{Получить цвета деталей, поставляемых поставщиком П1.}
+\begin{verbatim}
+select color from parts
+join suppliers_parts_projects on suppliers_parts_projects.partId = id
+where suppliers_parts_projects.supplierId = 1
+group by color;
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task2_20.tex}
+\caption{Результаты запроса 2.20}
+\end{table}
+
+\subsection{Получить номера проектов, обеспечиваемых по крайней мере одним поставщиком не из того же города.}
+\begin{verbatim}
+select projectId from suppliers_parts_projects
+join suppliers on suppliers.id = supplierId
+join projects on projects.id = projectId
+where suppliers.location != projects.location
+group by projectId;
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task2_13.tex}
+\caption{Результаты запроса 2.13}
+\end{table}
+
+\subsection{Получить номера поставщиков со статусом, меньшим чем у поставщика П1.}
+\begin{verbatim}
+select id from suppliers
+where status < (select status from suppliers as sub where sub.id = 1);
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task2_24.tex}
+\caption{Результаты запроса 2.24}
+\end{table}
+
+\subsection{Получить полную информацию обо всех проектах в Лондоне.}
+\begin{verbatim}
+select * from projects
+where location = "Лондон";
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task2_2.tex}
+\caption{Результаты запроса 2.2}
+\end{table}
+
+\subsection{Получить все такие тройки "номера поставщиков-номера деталей-номера проектов", для которых выводимые поставщик, деталь и проект размещены в одном городе.}
+\begin{verbatim}
+select supplierId, partId, projectId from suppliers_parts_projects
+join suppliers on suppliers.id = supplierId
+join parts on parts.id = partId
+join projects on projects.id = projectId
+where suppliers.location = parts.location and parts.location = projects.location;
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task2_6.tex}
+\caption{Результаты запроса 2.6}
+\end{table}
+
+\subsection{Получить все пары названий городов, для которых поставщик из первого города обеспечивает проект во втором городе.}
+\begin{verbatim}
+select suppliers.location, projects.location from suppliers_parts_projects
+join suppliers on suppliers.id = supplierId
+join projects on projects.id = projectId
+group by suppliers.location, projects.location;
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task2_11.tex}
+\caption{Результаты запроса 2.11}
+\end{table}
+
+\subsection{Получить все такие тройки "номера поставщиков-номера деталей-номера проектов", для которых никакие из двух выводимых поставщиков, деталей и проектов не размещены в одном городе.}
+\begin{verbatim}
+select supplierId, partId, projectId from suppliers_parts_projects
+join suppliers on suppliers.id = supplierId
+join parts on parts.id = partId
+join projects on projects.id = projectId
+where not (
+suppliers.location = parts.location or parts.location = projects.location
+or suppliers.location = projects.location);
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task2_8.tex}
+\caption{Результаты запроса 2.8}
+\end{table}
+
+\subsection{Получить номера проектов, для которых среднее количество поставляемых деталей Д1 больше, чем наибольшее количество любых деталей, поставляемых для проекта ПР1.}
+\begin{verbatim}
+select id from projects
+join suppliers_parts_projects on suppliers_parts_projects.projectId = id
+where suppliers_parts_projects.partId = 1
+group by id
+having avg(number) > (select max(a.part_num) from (
+	select sum(sub.number) as part_num from suppliers_parts_projects as sub
+    where sub.projectId = 1
+    group by sub.partId) as a
+    );
+\end{verbatim}
+\begin{table}[H]
+\centering
+\input{task2_26.tex}
+\caption{Результаты запроса 2.26}
+\end{table}
+
+\end{document}
+
+
+

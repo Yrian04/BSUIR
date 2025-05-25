@@ -1,0 +1,36 @@
+sc_node_tuple -> ..tup;;
+
+nrel_my_sum
+<-arithmetical_operation;
+<-rrel_researched_relation: subject_area_of_arithmetics;
+=>nrel_main_idtf: [my sum] (* <- lang_en;;*);
+=>nrel_idtf: [моя сумма] (* <- lang_ru;;*);
+=>nrel_first_domain: number;
+=>nrel_second_domain: number;
+=>nrel_third_domain: number;
+=>nrel_definitional_domain: number;
+=>nrel_example: 
+	[*
+		..tup ->rrel_term:3;
+		->rrel_term:2;
+		->rrel_sum: 5;;
+		number
+		->2;
+		->3;
+		->5;;
+	*];
+<-rrel_key_element: ..dev;;
+
+..dev
+<-definition;
+=>nrel_translation_of_sc_text: text;
+=>nrel_used_concept: ...
+	(*
+		<-sc_node_tuple;;
+		<-rrel_sum;;
+		<-rrel_term;;
+		<-arithmetical_operation;;
+	*);;
+	
+text
+->[Сложе́ние — одна из основных арифметических действий двух слагаемых, результатом которой является сумма, получаемое увеличением значения первого аргумента на значение второго аргумента.];;

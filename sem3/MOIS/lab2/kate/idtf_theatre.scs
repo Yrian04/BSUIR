@@ -1,0 +1,143 @@
+section_subject_domain_of_dramatic_theatre
+=> nrel_main_idtf:
+    [Раздел. Предметная область драматического тетра]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Section. Subject domain of dramatic_theatre]
+    (* <- lang_en;; *);;
+
+section_subject_domain_of_opera
+=> nrel_main_idtf:
+    [Раздел. Предметная область оперы]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Section. Subject domain of opera]
+    (* <- lang_en;; *);;
+
+section_subject_domain_of_ballet
+=> nrel_main_idtf:
+    [Раздел. Предметная область балета]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Section. Subject domain of ballet]
+    (* <- lang_en;; *);;
+
+section_subject_domain_of_puppet_theatre
+=> nrel_main_idtf:
+    [Раздел. Предметная область кукольного театра]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Section. Subject domain of puppet theatre]
+    (* <- lang_en;; *);;
+
+section_subject_domain_of_pantomime
+=> nrel_main_idtf:
+    [Раздел. Предметная область пантомимы]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Section. Subject domain of pantomime]
+    (* <- lang_en;; *);;
+
+section_subject_domain_of_musical
+=> nrel_main_idtf:
+    [Раздел. Предметная область мюзикла]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Subject domain of musical]
+    (* <- lang_en;; *);;
+
+section_subject_domain_of_operetta
+=> nrel_main_idtf:
+    [Раздел. Предметная область оперетты]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Subject domain of operetta]
+    (* <- lang_en;; *);;   
+
+subject_domain_of_dramatic_theatre
+=> nrel_main_idtf:
+    [Предметная область драматического театра]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Subject domain of dramatic theatre]
+    (* <- lang_en;; *);;
+
+subject_domain_of_opera
+=> nrel_main_idtf:
+    [Предметная область оперы]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Subject domain of operd]
+    (* <- lang_en;; *);;
+
+subject_domain_of_ballet
+=> nrel_main_idtf:
+    [Предметная область балета]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Subject domain of ballet]
+    (* <- lang_en;; *);;
+
+subject_domain_of_puppet_theatre
+=> nrel_main_idtf:
+    [Предметная область кукольного тетра]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Subject domain of puppet theatre]
+    (* <- lang_en;; *);;
+
+subject_domain_of_pantomime
+=> nrel_main_idtf:
+    [Предметная область пантомимы]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Subject domain of pantomime]
+    (* <- lang_en;; *);;
+
+subject_domain_of_musical
+=> nrel_main_idtf:
+    [Предметная область мюзикла]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Subject domain of musical]
+    (* <- lang_en;; *);;
+
+subject_domain_of_operetta
+=> nrel_main_idtf:
+    [Предметная область оперетты]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Subject domain of operetta]
+    (* <- lang_en;; *);;
+
+concept_actors
+=> nrel_main_idtf:
+    [Актеры]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Actors]
+    (* <- lang_en;; *);;
+
+concept_production
+=> nrel_main_idtf:
+    [Постановка]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Production]
+    (* <- lang_en;; *);;
+
+concept_scene
+=> nrel_main_idtf:
+    [Сцена]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Scene]
+    (* <- lang_en;; *);;
+
+concept_audience
+=> nrel_main_idtf:
+    [Зрители]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Audience]
+    (* <- lang_en;; *);;

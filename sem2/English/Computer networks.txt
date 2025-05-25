@@ -1,0 +1,34 @@
+Network types depend on how large they are and how much of an area they cover. So, network types:
+1)	PAN(personal area network). Network that is used on a personal level. PANs use wireless technologies such as: Bluetooth, Infrared, NFC. But the also can connect by using a USB cable.
+2)	LAN(local area network). It’s a group of devices(computers, servers, switches and printers) that are located in the same building. The most common type of LAN is an Ethernet LAN.
+3)	WLAN(wireless local area network). Uses wireless communication instead of wired communication. A WLAN is a LAN but without using cables.
+4)	CAN(campus area network). A network that joins 2 or more LANs together within a limited area. It can contain several buildings with LAN connected to each other.
+5)	MAN(metropolitan area network). Larger than a CAN. It covers over several buildings in a city or town.
+6)	SAN(storage area network). It’s a special high-speed network that stores and provides access to large amounts of data.
+7)	WAN(wide area network). It’s the largest type of network. It covers over a large area. The Internet is an example of a WAN.
+
+Topology is the shape of a network. There are basic network topologies:
+	Star: there is a central device to which all the workstations are connected
+	Bus: every workstation are connected to a main cable called a bus
+	Ring: the workstation are connected to one another in a loop
+	Tree: a group of stars connected to a central bus
+
+Network architecture is a structure and organization of networks. There are two main network architectures: peer-to-peer, client-server.
+
+Network protocol - is a set of rules that defines the principles of interaction between devices in a network.
+
+The Internet is an International computer Network.
+
+There are some types of the Internet Connection:
+	Dial-up
+	Broadband
+	Wi-fi
+
+World Wide Web is a collection of files and pages containing links to other document on the internet
+
+There are some of components of the Web:
+	HTML(Hypertext Markup  Language) – coding language used to create and design web pages.
+	CSS(Cascading Style Sheets) - coding language used to design web pages.
+	HTTP(Hypertext Transfer Protocol) – protocol used for sending data over the internet.
+
+The Internet of Things (IoT) is a term used to describe the interconnection of physical devices, vehicles and other objects thanks to the internet. The IoT can make our lives more convenient by automating tasks and providing easy access to information.

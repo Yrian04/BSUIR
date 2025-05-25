@@ -1,0 +1,23 @@
+@startuml view
+interface IPageTemplateSource {
+	+getByName: HTMLPageTemplate
+}
+
+class FilePageTemplateSource implements IPageTemplateSource {
+	+getByName: HTMLPageTemplate
+}
+note left of IPageTemplateSource: Page template is string content\nused to create HTML page via\ndata substitution
+
+class HTMLPageFactory {
+	-pageTemplatesSource: IPageTemplateSource
+	+create(data: Any): HTMLDocument
+}
+HTMLPageFactory "1" o-- "1" IPageTemplateSource: "pageTemplatesSource"
+
+class Application <<injector>> <<singleton>> {
+	+getRequiredService(type: Class | Interface): object
+}
+Application ..> HTMLPageFactory : <<instantiate>>
+Application ..> FilePageTemplateSource : <<instantiate>>
+note right of Application : DI container implemented by framework
+@enduml

@@ -1,0 +1,21 @@
+Software is a set of instructions, data or programs used to control the basic functions of computer and perform specific tasks. Categories of software are:
+	System software - controls the basic functions of a computer
+	Application software - lets you perform specific tasks
+
+Operating system is a set of programs that control the hardware and allow people and applications to communicate with the hardware. Examples of Operating system:
+	The Windows – designed by Microsoft and used on most PCs
+	Mac OS – created by Apple and used on Macintosh computers
+	Unix – used on mainframes
+	Linux – developed under the GNU General Public License. It is used on PCs and small devices.
+
+Software installation is the process of placing a program into a computer so that it can be run. There are two categories of software: open source and proprietary. Open source software is not protected by copyright. Based on licensing rights, proprietary software divided into:
+	commercial software (buy before use)
+	demoware (try some features)
+	shareware (try all features)
+	freeware (unlimited free usage)
+
+Software piracy is the illegal copying, distributing, sharing, selling or use of software. However, the use of unlicensed software has its advantages and disadvantages. For example:
+	There is always a risk of downloading a file infected with viruses.
+	Piracy helps small businesses that cannot afford expensive software.
+	If you use an unlicensed program you can't get technical support.
+

@@ -1,0 +1,27 @@
+version = 1
+revision = 1
+requires-python = ">=3.12"
+
+[[package]]
+name = "lab4"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "pygame" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "pygame", specifier = "==2.5.0" }]
+
+[[package]]
+name = "pygame"
+version = "2.5.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/59/2a/cf94cd20b993baa764e3e7eae9e7084ca2d04c5e3f74eacf8f1ea62d9be9/pygame-2.5.0.tar.gz", hash = "sha256:edd5745b79435976d92c0a7318aedcafcb7ac4567125ac6ba88aa473559ef9ab", size = 15560194 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4b/93/fe8187d7b1610abb6a4146db016b6a2205b0d9b4a6247be6c6d12696cfb6/pygame-2.5.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:7ddec0c823fd0869fe4a75ba906dcb7889db0e0c289ce8c03d4ce0a67351ab66", size = 13479285 },
+    { url = "https://files.pythonhosted.org/packages/b8/10/32dd536021c75461164b3d1dfa600782065e541f0ead709187af624d223b/pygame-2.5.0-cp312-cp312-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:bae93ce29b8337a5e02507603094c51740c9f496272ef070e2624e9647776568", size = 14159124 },
+    { url = "https://files.pythonhosted.org/packages/49/1f/5864fdb62580969748bec9d9d08a1948bac084688028d658602a39774da8/pygame-2.5.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c80a1ad38d11102b4dfa0519aa2a26fea534503b259872609acc9adb1860884e", size = 13835319 },
+    { url = "https://files.pythonhosted.org/packages/ae/26/3d06638712daa486de332534858daf31ce973914942b19b2456f93b3c92e/pygame-2.5.0-cp312-cp312-win32.whl", hash = "sha256:8ffebcafda0add8072f82999498113be37494694fa36e02155cfaf1a0ba56fe2", size = 10162189 },
+    { url = "https://files.pythonhosted.org/packages/c5/26/803a33a4d0b3648c865dc51b8ddd67602e451057248dd8203d58142e4cbf/pygame-2.5.0-cp312-cp312-win_amd64.whl", hash = "sha256:574e310ba708da0c34b71c4158aa7cdca3cf3e16c4100dcd1d3c931a9c6705b4", size = 10510722 },
+]

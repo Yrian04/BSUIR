@@ -1,0 +1,45 @@
+# 1. Список всех Олимпийских игр с годами и странами-хозяевами
+PREFIX oly: <http://example.org/olympics.owl#>
+SELECT ?eventName ?year ?country WHERE {
+?event a oly:OlympicEvent ;
+        oly:year ?year ;
+        oly:hostedBy ?country .
+BIND(REPLACE(STR(?event), ".*#", "") AS ?eventName)
+}
+ORDER BY ?year
+
+# 2. Спортсмены, участвовавшие в Токио-2020
+PREFIX oly: <http://example.org/olympics.owl#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+SELECT ?athleteName WHERE {
+?athlete a oly:Athlete ;
+        oly:participatesIn oly:Tokyo2020 ;
+        foaf:name ?athleteName .
+}
+
+# 3. Зимние виды спорта на Олимпиадах
+PREFIX oly: <http://example.org/olympics.owl#>
+SELECT DISTINCT ?sportName WHERE {
+?event a oly:WinterOlympics ;
+        oly:hasDiscipline ?sport .
+?sport a oly:WinterSport ;
+        <http://www.w3.org/2004/02/skos/core#prefLabel> ?sportName .
+}
+
+# 4. Топ-3 стран по медалям
+PREFIX oly: <http://example.org/olympics.owl#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+SELECT ?countryName ?medals WHERE {
+?country a oly:Country ;
+        oly:medalCount ?medals ;
+        foaf:name ?countryName .
+} ORDER BY DESC(?medals) LIMIT 3
+
+# 5. Олимпийские события с допинг-скандалами
+PREFIX oly: <http://example.org/olympics.owl#>
+SELECT ?eventName ?scandal WHERE {
+?event a oly:OlympicEvent ;
+        oly:hasProblem ?scandal .
+?scandal a oly:DopingScandal .
+BIND(REPLACE(STR(?event), ".*#", "") AS ?eventName)
+}   

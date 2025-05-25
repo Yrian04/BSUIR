@@ -1,0 +1,25 @@
+@startuml state
+
+[*] --> StartWindow
+StartWindow --> CreateEventWindow: CreateButtonOnClick
+StartWindow --> JoinEventWindow: JoinButtonOnClick
+
+CreateEventWindow --> EventMainWindow: PostButtonOnClick
+CreateEventWindow --> StartWindow: BackButtonOnClick
+CreateEventWindow --> CreateEventWindow: Invalid data
+CreateEventWindow: do/ EventController.createEvent()
+
+JoinEventWindow --> EventMainWindow: PostButtonOnClick
+JoinEventWindow --> StartWindow: BackButtonOnClick
+JoinEventWindow --> JoinEventWindow: Invalid data
+JoinEventWindow: do/ EventController.joinEvent()
+
+' EventMainWindow --> StartWindow: Event finish
+EventMainWindow --> [*]: Event finish
+EventMainWindow: do/ EventController.getParticipants()
+EventMainWindow: do/ EventController.deleteParticipant()
+EventMainWindow: do/ ChatController.sendMessage()
+EventMainWindow: do/ ChatController.deleteMessage()
+EventMainWindow: exit/ EventController.endEvent()
+
+@enduml

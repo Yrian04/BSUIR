@@ -1,0 +1,35 @@
+@startuml
+
+actor "Пользователь" as User
+actor "Ведущий" as Host
+actor "Зритель" as Viewer
+
+Viewer --|> User
+Host --|> Viewer
+
+rectangle "Платформа онлайн-конференций" {
+    
+    usecase "Создать мероприятие" as UC_CreateEvent
+    usecase "Присоединиться к мероприятию" as UC_JoinEvent
+    usecase "Отправить сообщение в чат" as UC_SendMessage
+    usecase "Удалить сообщение из чата" as UC_DeleteMessage
+    usecase "Настроить трансляцию" as UC_StreamSettings
+    usecase "Ограничить доступ к чату" as UC_RestrictChat
+    usecase "Удалить пользователя" as UC_RemoveUser
+    usecase "Просмотр участников" as UC_ViewParticipants
+
+    User -- UC_CreateEvent
+    User -- UC_JoinEvent
+    
+    Viewer -- UC_SendMessage
+    Viewer -- UC_ViewParticipants
+    
+    Host -- UC_DeleteMessage
+    Host -- UC_StreamSettings
+    Host -- UC_RestrictChat
+    Host -- UC_RemoveUser
+
+}
+
+@enduml
+

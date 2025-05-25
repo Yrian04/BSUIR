@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>Graph_Editor</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Undirected graph">
+      <HintPath>..\..\Undirected graph\Undirected graph\bin\Debug\net7.0\Undirected graph.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

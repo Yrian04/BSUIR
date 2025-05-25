@@ -1,0 +1,84 @@
+@startuml controller
+abstract class Controller {
+    -HTMLPageFactory: HTMLPageFactory
+    #validateAccessToken(token: JWTtoken): bool
+}
+note top of Controller : Base controller class implemented by framework
+
+' === Event ===
+
+interface IEventController {
+    +{abstract}createEvent(contex: RequestContex, Event): void
+    +{abstract}joinEvent(contex: RequestContex, Event, User): void
+    +{abstract}getParticipants(contex: RequestContex: Event): void
+    +{abstract}deleteParticipant(contex: RequestContex: Event, User: user): void
+    +{abstract}endEvent(contex: RequestContex, Event): void
+}
+
+class EventController extends Controller implements IEventController {
+    -IEventService service
+    -IUserService service
+    +createEvent(contex: RequestContex, Event): void
+    +joinEvent(contex: RequestContex, Event, User): void
+    +getParticipants(contex: RequestContex: Event): void
+    +deleteParticipant(contex: RequestContex: Event, User: user): void
+    +endEvent(contex: RequestContex, Event): void
+}
+EventController "1" o-- "1" IEventService
+EventController "1" o-- "1" IUserService
+EventController ..> Event: <<use>>
+EventController ..> User: <<use>>
+
+' === Chat ===
+
+interface IChatController{
+    +{abstract}sendMessage(context: RequestContex, message: Message): void
+    +{abstract}deleteMessage(context: RequestContex, message: Message): void
+}
+
+class ChatController extends Controller implements IChatController {
+    -IChatService service
+    +sendMessage(context: RequestContex): void
+    +deleteMessage(context: RequestContex, message: Message): void
+}
+ChatController "1" o-- "1"  IChatService
+ChatController ..> Message: <<use>>
+
+' === Authentication ===
+
+interface IAuthenticationController {
+	+{abstract}profileGet(context: RequestContext): HTMLDocument
+    +{abstract}registerGet(context: RequestContext): HTMLDocument
+    +{abstract}registerPost(context: RequestContext, user: User)
+	+{abstract}loginGet(context: RequestContext): HTMLDocument
+    +{abstract}loginPost(context: RequestContext, email: string, password: string): JWTtoken
+    +{abstract}updateUser(context: RequestContext, user: User)
+    +{abstract}deleteUser(context: RequestContext, email: string)
+}
+
+class AuthenticationController extends Controller implements IAuthenticationController {
+    -service: IAuthenticationService
+	+profileGet(context: RequestContext): HTMLDocument
+    +registerGet(context: RequestContext): HTMLDocument
+    +registerPost(context: RequestContext, user: User, passwordHash: int)
+	+loginGet(context: RequestContext): HTMLDocument
+    +loginPost(context: RequestContext,  user: User, passwordHash: int): JWTtoken
+    +updateUser(context: RequestContext, user: User, passwordHash: int)
+    +deleteUser(context: RequestContext, user: User)
+}
+AuthenticationController "1" o-- "1" IAuthenticationService
+AuthenticationController ..> User : <<use>>
+
+' === Application ===
+
+class Application <<injector>> <<singleton>> {
+	+getRequiredService(type: Class | Interface): object
+}
+Application ..> EventController: <<instantiate>>
+Application ..> EventController: <<call>>
+Application ..> ChatController: <<instantiate>>
+Application ..> ChatController: <<call>>
+Application ..> AuthenticationController: <<instantiate>>
+Application ..> AuthenticationController: <<call>>
+note top of Application : DI container implemented by framework
+@enduml

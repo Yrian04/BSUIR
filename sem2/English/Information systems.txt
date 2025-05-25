@@ -1,0 +1,29 @@
+An information system is a collection of components that work together to collect, process, store information to support decision-making organizational operations. There are some types of information systems:
+	1) transaction processing system (TPS)
+	2) management information system(MIS)
+	3) decision support system (DSS)
+	4) executive information system (EIS)
+	5) expert system
+	6) neural network
+
+SDLC (Software Development Life Cycle) - Process to develop software, including planning, testing, and design.
+Core phases of SDLC: Planning phase, Analysis phase, Design phase, Implementation phase, Maintenance phase.
+
+Planning.
+The goal of planning phase is to create Project Development Plan.
+
+Analysis.
+The goal of analysis phase is to create System Requirement Report.
+
+Disign.
+The goal of disign phase is to create Application Specification.
+
+Implimentation.
+The goal of implimintation phase is to create working system.
+
+Maintenence.
+The longest phase of SDLC. Its goal is to keeping the system in good shape.
+
+
+
+

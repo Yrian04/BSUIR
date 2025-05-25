@@ -1,0 +1,198 @@
+@startuml model
+' === Event ===
+
+class VideoParameters {
+    +Resolution resolution
+    +int framerate
+    ...
+}
+
+class AudioParameters {
+    +int bitrate
+    ...
+}
+
+class TranslationParameters {
+    +VideoParameters videoParameters
+    +AudioParameters audioParameters 
+    ...
+}
+TranslationParameters "1" o-- "1" VideoParameters
+TranslationParameters "1" o-- "1" AudioParameters
+
+class EventParameters {
+    +String name
+    +String description
+    +Date date
+    +Time time
+    +Boolean isPrivate
+    +TranslationParameters translationParameters
+}
+EventParameters "1" o-- "1" TranslationParameters
+
+class Event <<data>> {
+    +EventParameters parameters
+    +String accessCode
+    +Translation translation
+    +List<User> participants
+}
+Event "1" o-- "1" EventParameters
+Event "1" -right> "1..*" User
+
+interface IEventRepository {
+    +{abstract}create(Event): void
+    +{abstract}read(): List<Event>
+    +{abstract}update(Event): void
+    +{abstract}delete(Event): void
+}
+IEventRepository ..> Event: <<use>>
+
+interface IEventService {
+    +{abstract}create(Event): void
+    +{abstract}join(eventCode: String, user: User): Event
+    +{abstract}update(Event): void
+    +{abstract}removeParticipant(User): void
+    +{abstract}endEvent(Event): void
+}
+
+class EventService implements IEventService {
+    -IEventRepository repo
+    +create(Event): void
+    +join(eventCode: String, User user): Event
+    +update(Event): void
+    +removeParticipant(User): void
+    +endEvent(Event): void
+}
+EventService "1" o-- "1" IEventRepository
+
+' === User ===
+
+class Rights{
+    +Boolean mayDeleteMessanges
+    +Boolean mayDeleteViewers
+    +Boolean maySendMessanges
+    +Boolean mayConfigurateTranslation
+}
+Role o-right- Rights
+
+abstract class Role{
+    +String name
+    +Rights rights
+    +int level
+}
+
+class Host extends Role{
+    +String name = "host"
+    +int level = 0
+}
+
+class Viewer extends Role{
+    +string name = "viewer"
+    +int level = MAX_INT32
+}
+
+class User <<data>> {
+    +int id
+    +String name
+    +Role role
+}
+User "1" o-- "1"  Role
+
+interface IUserRepository {
+    +{abstract}create(User): void
+    +{abstract}read(Event): List<User>
+    +{abstract}update(User): void
+    +{abstract}delete(User): void
+}
+IUserRepository ..> User: <<use>>
+IUserRepository ..> Event: <<use>>
+
+interface IUserService {
+    +{abstract}create(User): void
+    +{abstract}delete(User): void
+}
+
+class UserService implements IUserService {
+    -IUserRepository repo
+    +create(User): void
+    +delete(User): void
+}
+UserService "1" o-- "1" IUserRepository
+
+' === Chat ===
+
+class Message <<data>> {
+    +int messageId
+    +int senderId
+    +String senderName
+    +String content
+    +Time timestamp
+}
+Message "*" --> "1 senderId" User
+
+interface IMessageRepository {
+    +{abstract}create(Messange): void
+    +{abstract}read(Event): List<Messange>
+    +{abstract}update(Messange): void
+    +{abstract}delete(Messange): void
+}
+IMessageRepository ..> Message: <<use>>
+
+interface IChatService {
+    +{abstract}getMessages(Event): List<Messange>
+    +{abstract}addMessage(Message): void
+    +{abstract}deleteMessage(Message): void
+}
+
+class ChatService implements IChatService {
+    -IMessageRepository repo 
+    +getMessages(Event): List<Messange>
+    +addMessage(Message): void
+    +deleteMessage(Message): void
+}
+ChatService "1" o-- "1" IMessageRepository
+
+' === Authentication ===
+
+class Password <<data>> {
+    +int hash
+    +User owner
+}
+Password "1" -left-> "1" User
+
+interface IPasswordRepository  {
+    +create(password: Password)
+    +read(user: User): Password
+    +update(password: Password)
+    +delete(password: Password)
+}
+IPasswordRepository ..> Password: <<Use>>
+IPasswordRepository ..> User: <<Use>>
+
+interface IAuthenticationService  {
+    +{abstract}register(password: Password): bool
+    +{abstract}login(password: Password): bool
+    +{abstract}update(password: Password)
+    +{abstract}delete(password: Password)
+}
+
+class AuthenticationService implements IAuthenticationService {
+    -repo : IPasswordRepository 
+    +register(user: User): bool
+    +login(email: string, password: string): bool
+    +updateUser(user: User)
+    +deleteUser(email: string)
+}
+AuthenticationService "1" o-- "1" IPasswordRepository
+
+' === Application ===
+
+class Application <<injector>> <<singleton>> {
+	+getRequiredService(type: Class | Interface): object
+}
+Application ..> EventService: <<instantiate>>
+Application ..> UserService: <<instantiate>>
+Application ..> ChatService: <<instantiate>>
+Application ..> AuthenticationService: <<instantiate>>
+note top of Application : DI container implemented by framework
+@enduml

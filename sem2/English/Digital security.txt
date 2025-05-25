@@ -1,0 +1,30 @@
+Security in IT is the defense of digital information against internal and external, malicious and random threats. There are 2 types of IT security:
+1)	Physical security. 
+2)	Information security.
+
+Malware is software designed to cause damage to computer systems or steal data. Main types of malware include:
+	A virus - is a program that attaches to other software and infects computer when you use this software.
+	A worm - is a program that duplicates itself over a network, often causing slowing down of the network.
+	A Trojan - is a program that looks safe but can cause damage to your computer.
+
+There are several ways to become infected with malware.
+	Malware can be attached to email
+	Downloading software from unknown websites.
+	Malware can infects your computer through infected USB drives
+
+Here are some ways to avoid computer infections:
+	Install and keep updated anti-virus software and firewall protection.
+	Do not download programs from unknown sites
+	Keep your operating system and software updated with the latest version of security service.
+
+Cyberwarfare attacks refer to acts of using computer technology to launch attacks on other countries or organizations. These attacks can damage computer systems and steal vital information.
+
+Cyber weapons are tools or programs used in these attacks. It is a software designed to abuse Weaknesses in a computer system or network.
+
+Social engineering refers to the use of psychological manipulation to trick people into sharing confidential information. There are several methods that social engineers use. 
+	Phishing - emails or messages that try look legal, but are designed to trick people into sharing confidential information.
+	Vishing(voice phishing), which is similar to phishing but uses voice communication instead of email.
+	Smishing(short for SMS phishing) SMS or text messages designed to trick people into clicking on a link or sharing personal information.
+
+Encryption is a technique used to convert simple or understandable data into an encrypted form to protect data from unauthorized access. There are two main types of encryption: Symmetric encryption, asymmetric encryption. Encryption matters because it helps protect confidential information.
+

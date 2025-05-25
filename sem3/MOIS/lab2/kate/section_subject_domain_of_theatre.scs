@@ -1,0 +1,50 @@
+section_subject_domain_of_theatre
+<- not_enough_formed_structure;
+<- sc_node_struct;
+=> nrel_main_idtf: 
+    [Section. Subject domain of theatre]
+    (* <- lang_en;; *);
+=> nrel_main_idtf:
+    [Раздел. Предметная область театра]
+    (* <- lang_ru;; *);
+<= nrel_section_decomposition: ... (*
+    <- sc_node_tuple;;
+    -> section_subject_domain_of_dramatic_theatre;;      
+    -> section_subject_domain_of_opera;;       
+    -> section_subject_domain_of_ballet;;      
+    -> section_subject_domain_of_puppet_theatre;;        
+    -> section_subject_domain_of_pantomime;;
+    -> section_subject_domain_of_musical;;
+    -> section_subject_domain_of_operetta;;
+    *);
+-> rrel_key_sc_element:
+    concept_actors;
+    concept_production;
+    concept_scene;
+    concept_audience;
+<- non_atomic_section;;
+
+section_subject_domain_of_theatre = 
+[*
+  subject_domain_of_theatre
+  <- subject_domain;
+  => nrel_main_idtf:
+      [Предметная область театра]
+      (* <- lang_ru;; *);
+  => nrel_main_idtf:
+      [Subject domain of theatre]
+      (* <- lang_en;; *);
+  -> rrel_maximum_studied_object_class: 
+      concept_actors;
+      concept_production;
+      concept_scene;
+      concept_audience;
+  => nrel_private_subject_domain:
+      subject_domain_of_dramatic_theatre;
+      subject_domain_of_opera;
+      subject_domain_of_ballet;
+      subject_domain_of_puppet_theatre;
+      subject_domain_of_pantomime;
+      subject_domain_of_musical;
+      subject_domain_of_operetta;;
+*];;

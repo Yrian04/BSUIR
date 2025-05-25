@@ -1,0 +1,20 @@
+lib_component_ui_menu_isomorphic = [*
+ui_menu_isomorphic <- ui_user_command_class_atom; ui_user_command_class_view_kb; ui_one_argument_command_class;;
+
+ui_menu_isomorphic
+=> nrel_main_idtf: 
+	[Какие структуры в одном графе изоморфны другому графу?]
+	(* <- lang_ru;; *);
+
+ui_menu_isomorphic => ui_nrel_command_template:
+	[*
+		question_find_isomorphic _-> ._question_find_isomorphic_instance
+			(*
+				_-> ui_arg_1;;
+				_-> ui_arg_2;;
+			*);;
+		._question_find_isomorphic_instance _<- question;;
+	*];;
+
+ui_menu_isomorphic => ui_nrel_command_lang_template: [Какие структуры в графе $ui_arg_1 изоморфны графу $ui_arg_2 ?] (* <- lang_ru;; *);;
+*];;

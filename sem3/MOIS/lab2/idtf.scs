@@ -1,0 +1,111 @@
+section_subject_domain_of_euclidean_geometry
+=> nrel_main_idtf:
+    [Раздел. Предметная область эвклидовой геометрии]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Section. Subject domain of euclidean geometry]
+    (* <- lang_en;; *);;
+
+section_subject_domain_of_affine_geometry
+=> nrel_main_idtf:
+    [Раздел. Предметная область аффинной геометрии]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Section. Subject domain of affine geometry]
+    (* <- lang_en;; *);;
+
+section_subject_domain_of_descriptive_geometry
+=> nrel_main_idtf:
+    [Раздел. Предметная область начерательной геометрии]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Section. Subject domain of descriptive geometry]
+    (* <- lang_en;; *);;
+
+section_subject_domain_of_non_euclidean_geometry
+=> nrel_main_idtf:
+    [Раздел. Предметная область неэвклидовой геометрии]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Section. Subject domain of non-euclidean geometry]
+    (* <- lang_en;; *);;
+
+section_subject_domain_of_topology
+=> nrel_main_idtf:
+    [Раздел. Предметная область топологии]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Section. Subject domain of topology]
+    (* <- lang_en;; *);;
+
+subject_domain_of_euclidean_geometry
+=> nrel_main_idtf:
+    [Предметная область эвклидовой геометрии]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Subject domain of euclidean geometry]
+    (* <- lang_en;; *);;
+
+subject_domain_of_affine_geometry
+=> nrel_main_idtf:
+    [Предметная область аффинной геометрии]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Subject domain of affine geometry]
+    (* <- lang_en;; *);;
+
+subject_domain_of_descriptive_geometry
+=> nrel_main_idtf:
+    [Предметная область начерательной геометрии]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Subject domain of descriptive geometry]
+    (* <- lang_en;; *);;
+
+subject_domain_of_non_euclidean_geometry
+=> nrel_main_idtf:
+    [Предметная область неэвклидовой геометрии]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Subject domain of non-euclidean geometry]
+    (* <- lang_en;; *);;
+
+subject_domain_of_topology
+=> nrel_main_idtf:
+    [Предметная область топологии]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Subject domain of topology]
+    (* <- lang_en;; *);;
+
+concept_geometry_body
+=> nrel_main_idtf:
+    [Геометрическое тело]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Geometry body]
+    (* <- lang_en;; *);;
+
+concept_relative_position
+=> nrel_main_idtf:
+    [Относительное положение]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Relative position]
+    (* <- lang_en;; *);;
+
+concept_relative_size
+=> nrel_main_idtf:
+    [Относительный размер]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Relative size]
+    (* <- lang_en;; *);;
+
+concept_transformation_of_geometry_bodies
+=> nrel_main_idtf:
+    [Преобразование геометрических тел]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Transformation of geometry bodies]
+    (* <- lang_en;; *);;

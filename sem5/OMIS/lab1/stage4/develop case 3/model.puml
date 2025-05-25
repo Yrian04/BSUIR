@@ -1,0 +1,231 @@
+@startuml model
+' === Event ===
+
+class VideoParameters {
+    +Resolution resolution
+    +int framerate
+    ...
+}
+
+class AudioParameters {
+    +int bitrate
+    ...
+}
+
+class TranslationParameters {
+    +VideoParameters videoParameters
+    +AudioParameters audioParameters 
+    ...
+}
+TranslationParameters "1" o-- "1" VideoParameters
+TranslationParameters "1" o-- "1" AudioParameters
+
+class EventParameters {
+    +String name
+    +String description
+    +Date date
+    +Time time
+    +Boolean isPrivate
+    +TranslationParameters translationParameters
+}
+EventParameters "1" o-- "1" TranslationParameters
+
+class Event <<data>> {
+    +EventParameters parameters
+    +String accessCode
+    +Translation translation
+    +List<User> participants
+}
+Event "1" o-- "1" EventParameters
+Event "1" -right-> "1..*" User
+
+interface IEventRepository {
+    +{abstract}create(Event): void
+    +{abstract}read(): List<Event>
+    +{abstract}update(Event): void
+    +{abstract}delete(Event): void
+}
+IEventRepository ..> Event: <<use>>
+
+interface IEventService {
+    +{abstract}create(Event): void
+    +{abstract}join(eventCode: String, user: User): Event
+    +{abstract}update(Event): void
+    +{abstract}removeParticipant(User): void
+    +{abstract}endEvent(Event): void
+}
+
+class EventService implements IEventService {
+    -IEventRepository repo
+    +create(Event): void
+    +join(eventCode: String, User user): Event
+    +update(Event): void
+    +removeParticipant(User): void
+    +endEvent(Event): void
+}
+EventService "1" o-- "1" IEventRepository
+
+' === User ===
+
+class Rights{
+    +Boolean mayDeleteMessanges
+    +Boolean mayDeleteViewers
+    +Boolean maySendMessanges
+    +Boolean mayConfigurateTranslation
+}
+Role o-right- Rights
+
+abstract class Role{
+    +String name
+    +Rights rights
+    +int level
+}
+
+class Host extends Role{
+    +String name = "host"
+    +int level = 0
+}
+
+class Viewer extends Role{
+    +string name = "viewer"
+    +int level = MAX_INT32
+}
+
+class User <<data>> {
+    +int id
+    +String name
+    +Role role
+}
+User "1" o-- "1"  Role
+
+interface IUserRepository {
+    +{abstract}create(User): void
+    +{abstract}read(Event): List<User>
+    +{abstract}update(User): void
+    +{abstract}delete(User): void
+}
+IUserRepository ..> User: <<use>>
+IUserRepository ..> Event: <<use>>
+
+interface IUserService {
+    +{abstract}create(User): void
+    +{abstract}delete(User): void
+}
+
+class UserService implements IUserService {
+    -IUserRepository repo
+    +create(User): void
+    +delete(User): void
+}
+UserService "1" o-- "1" IUserRepository
+
+' === Chat ===
+
+class Message <<data>> {
+    +int messageId
+    +int senderId
+    +String senderName
+    +String content
+    +Time timestamp
+}
+Message "*" --> "1 senderId" User
+
+interface IMessageRepository {
+    +{abstract}create(Messange): void
+    +{abstract}read(Event): List<Messange>
+    +{abstract}update(Messange): void
+    +{abstract}delete(Messange): void
+}
+IMessageRepository ..> Message: <<use>>
+
+interface IChatService {
+    +{abstract}getMessages(Event): List<Messange>
+    +{abstract}addMessage(Message): void
+    +{abstract}deleteMessage(Message): void
+}
+
+class ChatService implements IChatService {
+    -IMessageRepository repo 
+    +getMessages(Event): List<Messange>
+    +addMessage(Message): void
+    +deleteMessage(Message): void
+}
+ChatService "1" o-- "1" IMessageRepository
+
+' === Activity ===
+
+class QuizOption <<data>> {
+    +int QuizOptionId
+    +String content
+    +List<User> voters
+}
+QuizOption "1" --> "*" User
+
+interface IQuizOptionRepository {
+    +{abstract}create(QuizOption): void
+    +{abstract}read(): List<QuizOption>
+    +{abstract}update(QuizOption): void
+    +{abstract}delete(QuizOption): void
+}
+IQuizOptionRepository ..> QuizOption: <<use>>
+
+interface IVoteService {
+    +{abstract}vote(QuizOption, User): void
+    +{abstract}unvote(QuizOption, User): void
+}
+
+class VoteService implements IVoteService {
+    -IQuizOptionRepository repo
+    +vote(optionId: int, User): void
+    +unvote(optionId: int, User): void
+}
+VoteService "1" o-- "1" IQuizOptionRepository
+
+class Quiz <<data>> {
+    +int quizId
+    +int senderId
+    +String senderName
+    +Time timestamp
+    +List<QuizOption> options
+}
+Quiz "1" -right-> "1..*" QuizOption
+Quiz "1" --> "1 senderId" User
+
+interface IQuizRepository {
+    +{abstract}create(Quiz): void
+    +{abstract}read(Event): List<Quiz>
+    +{abstract}update(Quiz): void
+    +{abstract}delete(Quiz): void
+}
+IQuizRepository ..> Quiz: <<use>>
+
+interface IQuizService {
+    +{abstract}create(Quiz): void
+    +{abstract}read(Event): List<Quiz>
+    +{abstract}update(Quiz): void
+    +{abstract}delete(Quiz): void
+    +{abstract}vote(QuizOption, User): void
+    +{abstract}unvote(QuizOption, User): void
+}
+
+class QuizService implements IQuizService {
+    -IQuizRepository repo
+    +create(Quiz): void
+    +read(Event): List<Quiz>
+    +update(Quiz): void
+    +delete(Quiz): void
+}
+QuizService "1" o-- "1" IQuizRepository
+
+' === Application ===
+
+class Application <<injector>> <<singleton>> {
+	+getRequiredService(type: Class | Interface): object
+}
+Application ..> EventService: <<instantiate>>
+Application ..> UserService: <<instantiate>>
+Application ..> ChatService: <<instantiate>>
+Application ..> QuizService: <<instantiate>>
+Application ..> VoteService: <<instantiate>>
+note top of Application : DI container implemented by framework
+@enduml

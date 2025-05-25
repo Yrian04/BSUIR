@@ -1,0 +1,161 @@
+﻿<Window x:Class="Graph_Editor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Graph_Editor"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:vm="clr-namespace:Graph_Editor.ViewModels"
+        xmlns:selectors="clr-namespace:Graph_Editor.Selectors"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Menu Height="Auto">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Создать" Command="{Binding Create}"/>
+                <MenuItem Header="Открыть"/>
+                <MenuItem Header="Сохранить" Command="{Binding Save}"/>
+            </MenuItem>
+        </Menu>
+        <ToolBar
+            Grid.Row="1">
+            <ComboBox
+                ItemsSource="{Binding CanvasGraphs}"
+                SelectedItem="{Binding SelectedCanvasGraph}"
+                MinWidth="180"/>
+            <ComboBox
+                ItemsSource="{Binding CanvasGraphs}"
+                SelectedItem="{Binding TargetCanvasGraph}"
+                MinWidth="180"/>
+            <Button
+                Command="{Binding CartesianProduct}"
+                Margin="10,0,10,0"
+                ToolTip="Декартово произведение">
+                Декартово произведение
+            </Button>
+        </ToolBar>
+        <ToolBar 
+            Grid.Row="2" 
+            DataContext="{Binding CanvasGraphViewModel}">
+            <Button 
+                Margin="10,0,10,0"
+                Command="{Binding AddNode}"
+                ToolTip="Создать вершину">
+                <Image Source="pack://application:,,,/Icons/Node.png"/>
+            </Button>
+            <Button 
+                Margin="10,0,10,0"
+                Command="{Binding AddUndirectedEdge}"
+                ToolTip="Создать ребро">
+                <Image Source="pack://application:,,,/Icons/DEdge.png"/>
+            </Button>
+            <Button 
+                Margin="10,0,10,0"
+                Command="{Binding AddDirectedEdge}"
+                ToolTip="Создать дугу">
+                <Image Source="pack://application:,,,/Icons/UEdge.png"/>
+            </Button>
+            <Separator/>
+            <TextBox
+                Text="{Binding SelectedNode.Position}"
+                MinWidth="40"
+                Margin="10,0,10,0"/>
+            <ComboBox
+                x:Name="SourceCombo"
+                Margin="10,0,10,0"
+                MinWidth="100"
+                ItemsSource="{Binding CanvasNodes}"
+                SelectedItem="{Binding SelectedNode}"
+                IsEditable="True"
+                IsReadOnly="True"
+                Text="Вершина"/>
+            <ComboBox
+                x:Name="TargetCombo"
+                Margin="10,0,10,0"
+                MinWidth="100"
+                ItemsSource="{Binding CanvasNodes}"
+                SelectedItem="{Binding TargetNode}"
+                IsEditable="True"
+                IsReadOnly="True"
+                Text="Вершина"/>
+            <ComboBox
+                x:Name="EdgeCombo"
+                Margin="10,0,10,0"
+                MinWidth="100"
+                ItemsSource="{Binding CanvasEdges}"
+                SelectedItem="{Binding SelectedEdge}"
+                IsEditable="True"
+                IsReadOnly="True"
+                Text="Ребро">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Separator/>
+            <Button 
+                Margin="10,0,10,0"
+                Command="{Binding RemoveNode}"
+                ToolTip="Удалить вершину">
+                <Image Source="pack://application:,,,/Icons/XNode.png"/>
+            </Button>
+            <Button 
+                Margin="10,0,10,0"
+                Command="{Binding RemoveEdge}"
+                ToolTip="Удалить ребро">
+                <Image Source="pack://application:,,,/Icons/XEdge.png"/>
+            </Button>
+        </ToolBar>
+        <Grid
+            Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+            <Canvas
+                Grid.Column="0">
+                <ItemsControl
+                DataContext="{Binding CanvasGraphViewModel}"
+                ItemsSource="{Binding CanvasNodes}"
+                ItemTemplate="{StaticResource dt_node}"
+                ItemContainerStyle="{StaticResource s_node}"
+                ItemsPanel="{StaticResource ipt_canvas}"/>
+                <ItemsControl
+                DataContext="{Binding CanvasGraphViewModel}"
+                ItemsSource="{Binding CanvasEdges}"
+                ItemsPanel="{StaticResource ipt_canvas}">
+                    <ItemsControl.ItemTemplateSelector>
+                        <selectors:EdgeTemplateSelector
+                        UndirectedEdgeDataTemplate="{StaticResource dt_UEdge}"
+                        DirectedEdgeClassDataTemplate="{StaticResource dt_DEdge}"/>
+                    </ItemsControl.ItemTemplateSelector>
+                </ItemsControl>
+            </Canvas>
+            <ListBox
+                Grid.Column="1">
+                <ListBoxItem>
+                    <TextBlock Text="{Binding SelectedCanvasGraph.Graph.Name}"/>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <TextBlock Text="{Binding SelectedCanvasGraph.Graph.Center}"/>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <TextBlock Text="{Binding SelectedCanvasGraph.Graph.Diameter}"/>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <TextBlock Text="{Binding SelectedCanvasGraph.Graph.IncidenceMatrix}"/>
+                </ListBoxItem>
+            </ListBox>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,24 @@
+Computer programs are developed by computer programmers or software engineers. Computer programming include planning, coding, testing, and documenting. 
+Programming paradigms are different methods to writing computer programs that show different ways of thinking about programming. Today’s most popular programming paradigms are:
+1)	Event-driven
+2)	Procedural
+3)	Object-oriented
+4)	Declarative
+
+Object-oriented programming is one of the main programming methodologies, which is based on the idea that a program is a set of objects, that interact with each other. The three principles of OOP:
+1)	Encapsulation.
+2)	Inheritance.
+3)	Polymorphism.
+
+Artificial Intelligence(AI) is the ability of a machine or a computer program to think and learn. Advantages of AI is its ability to process large mount of data quickly. AI can also automate repetitive tasks.
+
+Virtual reality (VR) is when you wear a special headset that shows you a computer-generated world, so it feels like you're inside it.
+Augmented reality (AR) is when you use your phone or a special headset to see digital information, like pictures or text, displayed over the real world.
+
+Robotic systems are machines that can perform tasks automatically, without human intervention. The building blocks of a robotic system include the mechanical body, control system and power supply.
+
+There are several types of robots:
+	pre-programmed
+	humanoid
+	autnomous
+	teleoperated

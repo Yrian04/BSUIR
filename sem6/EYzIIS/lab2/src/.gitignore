@@ -1,0 +1,29 @@
+# Байт-код Python
+__pycache__/
+*.py[cod]
+
+# Виртуальные окружения
+venv/
+.env
+
+# Дистрибутивы и артефакты упаковки
+dist/
+*.egg-info/
+
+# Файлы покрытия тестов и кэш
+.coverage
+*.py,cover
+.cache/
+
+# Контрольные точки Jupyter Notebook
+.ipynb_checkpoints
+
+# IDE и редакторы (например, PyCharm)
+.idea/
+*.iml
+
+# Логи и временные файлы
+*.log
+*.tmp
+
+.vscode/

@@ -1,0 +1,382 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://example.org/olympics.owl#"
+     xml:base="http://example.org/olympics.owl"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+
+    <owl:Ontology rdf:about="http://example.org/olympics.owl">
+        <dc:title xml:lang="ru">Консолидированная онтология Олимпийских игр</dc:title>
+        <dc:description xml:lang="ru">Объединение всех разработанных версий онтологии</dc:description>
+        <dc:creator>Глёза Егор Дмитриевич</dc:creator>
+        <owl:imports rdf:resource="http://xmlns.com/foaf/0.1/"/>
+        <owl:imports rdf:resource="http://www.w3.org/2004/02/skos/core"/>
+    </owl:Ontology>
+
+    <!-- ****************************** КЛАССЫ ****************************** -->
+    <owl:Class rdf:ID="OlympicEvent">
+        <rdfs:label xml:lang="ru">Олимпийское событие</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:ID="AncientOlympics">
+        <rdfs:subClassOf rdf:resource="#OlympicEvent"/>
+        <rdfs:label xml:lang="ru">Древние Олимпийские игры</rdfs:label>
+        <rdfs:comment xml:lang="ru">Проводились в Олимпии с 776 г. до н.э.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:ID="ModernOlympics">
+        <rdfs:subClassOf rdf:resource="#OlympicEvent"/>
+        <rdfs:label xml:lang="ru">Современные Олимпийские игры</rdfs:label>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#revivedBy"/>
+                <owl:hasValue rdf:resource="#PierreDeCoubertin"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+
+    <owl:Class rdf:ID="SummerOlympics">
+        <rdfs:subClassOf rdf:resource="#ModernOlympics"/>
+        <rdfs:label xml:lang="ru">Летние Олимпийские игры</rdfs:label>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#hasDiscipline"/>
+                <owl:someValuesFrom rdf:resource="#SummerSport"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+
+    <owl:Class rdf:ID="WinterOlympics">
+        <rdfs:subClassOf rdf:resource="#ModernOlympics"/>
+        <rdfs:label xml:lang="ru">Зимние Олимпийские игры</rdfs:label>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#hasDiscipline"/>
+                <owl:someValuesFrom rdf:resource="#WinterSport"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+
+    <owl:Class rdf:ID="Paralympics">
+        <rdfs:subClassOf rdf:resource="#OlympicEvent"/>
+        <rdfs:label xml:lang="ru">Паралимпийские игры</rdfs:label>
+        <rdfs:comment xml:lang="ru">Соревнования для спортсменов с инвалидностью</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:ID="YouthOlympics">
+        <rdfs:subClassOf rdf:resource="#OlympicEvent"/>
+        <rdfs:label xml:lang="ru">Юношеские Олимпийские игры</rdfs:label>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#ageRestriction"/>
+                <owl:hasValue rdf:datatype="xsd:integer">14-18</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+
+    <owl:Class rdf:ID="SportDiscipline">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <rdfs:label xml:lang="ru">Спортивная дисциплина</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:ID="SummerSport">
+        <rdfs:subClassOf rdf:resource="#SportDiscipline"/>
+        <rdfs:label xml:lang="ru">Летний вид спорта</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:ID="WinterSport">
+        <rdfs:subClassOf rdf:resource="#SportDiscipline"/>
+        <rdfs:label xml:lang="ru">Зимний вид спорта</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:ID="NewSport">
+        <rdfs:subClassOf rdf:resource="#SportDiscipline"/>
+        <rdfs:label xml:lang="ru">Новый олимпийский вид спорта</rdfs:label>
+        <rdfs:comment xml:lang="ru">Добавлен после 2000 года</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:ID="Ceremony">
+        <rdfs:label xml:lang="ru">Церемония</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:ID="OpeningCeremony">
+        <rdfs:subClassOf rdf:resource="#Ceremony"/>
+        <rdfs:label xml:lang="ru">Церемония открытия</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:ID="ClosingCeremony">
+        <rdfs:subClassOf rdf:resource="#Ceremony"/>
+        <rdfs:label xml:lang="ru">Церемония закрытия</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:ID="MedalCeremony">
+        <rdfs:subClassOf rdf:resource="#Ceremony"/>
+        <rdfs:label xml:lang="ru">Церемония награждения</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:ID="OlympicTorch">
+        <rdfs:subClassOf rdf:resource="#Ceremony"/>
+        <rdfs:label xml:lang="ru">Олимпийский огонь</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:ID="Organization">
+        <rdfs:label xml:lang="ru">Организация</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:ID="NationalCommittee">
+        <rdfs:subClassOf rdf:resource="#Organization"/>
+        <rdfs:label xml:lang="ru">Национальный олимпийский комитет</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:ID="Sponsor">
+        <rdfs:subClassOf rdf:resource="#Organization"/>
+        <rdfs:label xml:lang="ru">Спонсор</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:ID="OlympicRecord">
+        <rdfs:label xml:lang="ru">Олимпийский рекорд</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:ID="Athlete">
+        <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <rdfs:label xml:lang="ru">Спортсмен</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:ID="Country">
+        <rdfs:label xml:lang="ru">Страна</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:ID="Problem">
+        <rdfs:label xml:lang="ru">Проблема</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:ID="DopingScandal">
+        <rdfs:subClassOf rdf:resource="#Problem"/>
+        <rdfs:label xml:lang="ru">Допинг-скандал</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:ID="PoliticalConflict">
+        <rdfs:subClassOf rdf:resource="#Problem"/>
+        <rdfs:label xml:lang="ru">Политический конфликт</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:ID="EnvironmentalIssue">
+        <rdfs:subClassOf rdf:resource="#Problem"/>
+        <rdfs:label xml:lang="ru">Экологическая проблема</rdfs:label>
+    </owl:Class>
+
+    <!-- ****************************** СВОЙСТВА ****************************** -->
+    <!-- Объектные свойства -->
+    <owl:ObjectProperty rdf:ID="hostedBy">
+        <rdfs:domain rdf:resource="#OlympicEvent"/>
+        <rdfs:range rdf:resource="#Country"/>
+        <rdfs:label xml:lang="ru">проводится в</rdfs:label>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:ID="participatesIn">
+        <rdfs:domain rdf:resource="#Athlete"/>
+        <rdfs:range rdf:resource="#OlympicEvent"/>
+        <rdfs:label xml:lang="ru">участвует в</rdfs:label>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:ID="hasDiscipline">
+        <rdfs:domain rdf:resource="#OlympicEvent"/>
+        <rdfs:range rdf:resource="#SportDiscipline"/>
+        <rdfs:label xml:lang="ru">включает дисциплину</rdfs:label>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:ID="organizedBy">
+        <rdfs:domain rdf:resource="#OlympicEvent"/>
+        <rdfs:range rdf:resource="#Organization"/>
+        <rdfs:label xml:lang="ru">организовано</rdfs:label>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:ID="sponsoredBy">
+        <rdfs:domain rdf:resource="#OlympicEvent"/>
+        <rdfs:range rdf:resource="#Sponsor"/>
+        <rdfs:label xml:lang="ru">спонсируется</rdfs:label>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:ID="hasCeremony">
+        <rdfs:domain rdf:resource="#OlympicEvent"/>
+        <rdfs:range rdf:resource="#Ceremony"/>
+        <rdfs:label xml:lang="ru">включает церемонию</rdfs:label>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:ID="holdsRecord">
+        <rdfs:domain rdf:resource="#Athlete"/>
+        <rdfs:range rdf:resource="#OlympicRecord"/>
+        <rdfs:label xml:lang="ru">устанавливает рекорд</rdfs:label>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:ID="hasProblem">
+        <rdfs:domain rdf:resource="#OlympicEvent"/>
+        <rdfs:range rdf:resource="#Problem"/>
+        <rdfs:label xml:lang="ru">имеет проблему</rdfs:label>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:ID="revivedBy">
+        <rdfs:domain rdf:resource="#ModernOlympics"/>
+        <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <rdfs:label xml:lang="ru">возрождены</rdfs:label>
+    </owl:ObjectProperty>
+
+    <!-- Свойства данных -->
+    <owl:DatatypeProperty rdf:ID="year">
+        <rdfs:domain rdf:resource="#OlympicEvent"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:label xml:lang="ru">год проведения</rdfs:label>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:ID="medalCount">
+        <rdfs:domain rdf:resource="#Country"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:label xml:lang="ru">количество медалей</rdfs:label>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:ID="ageRestriction">
+        <rdfs:domain rdf:resource="#YouthOlympics"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="ru">возрастные ограничения</rdfs:label>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:ID="recordType">
+        <rdfs:domain rdf:resource="#OlympicRecord"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="ru">тип рекорда</rdfs:label>
+    </owl:DatatypeProperty>
+
+    <!-- ****************************** ЭКЗЕМПЛЯРЫ ****************************** -->
+    <!-- Olympic Events -->
+    <SummerOlympics rdf:ID="Tokyo2020">
+        <year>2021</year>
+        <hostedBy rdf:resource="#Japan"/>
+        <hasDiscipline rdf:resource="#Swimming"/>
+        <hasCeremony rdf:resource="#TokyoOpening2021"/>
+        <sponsoredBy rdf:resource="#Toyota"/>
+    </SummerOlympics>
+
+    <WinterOlympics rdf:ID="Beijing2022">
+        <year>2022</year>
+        <hostedBy rdf:resource="#China"/>
+        <hasDiscipline rdf:resource="#FigureSkating"/>
+    </WinterOlympics>
+
+    <YouthOlympics rdf:ID="Singapore2010">
+        <year>2010</year>
+        <ageRestriction>14-18</ageRestriction>
+    </YouthOlympics>
+
+    <!-- Athletes -->
+    <Athlete rdf:ID="MichaelPhelps">
+        <foaf:name>Майкл Фелпс</foaf:name>
+        <participatesIn rdf:resource="#Tokyo2020"/>
+        <holdsRecord rdf:resource="#MostGoldMedals"/>
+    </Athlete>
+
+    <Athlete rdf:ID="SimoneBiles">
+        <foaf:name>Симона Байлз</foaf:name>
+        <participatesIn rdf:resource="#Tokyo2020"/>
+    </Athlete>
+
+    <Athlete rdf:ID="YuzuruHanyu">
+        <foaf:name>Юдзуру Ханю</foaf:name>
+        <participatesIn rdf:resource="#Beijing2022"/>
+    </Athlete>
+
+    <!-- Countries -->
+    <Country rdf:ID="Russia">
+        <medalCount>620</medalCount>
+        <skos:member>
+            <skos:Concept>
+                <skos:prefLabel xml:lang="ru">Советский Союз</skos:prefLabel>
+                <skos:broader rdf:resource="#Russia"/>
+            </skos:Concept>
+        </skos:member>
+    </Country>
+
+    <Country rdf:ID="USA">
+        <medalCount>2827</medalCount>
+    </Country>
+
+    <Country rdf:ID="China">
+        <medalCount>666</medalCount>
+    </Country>
+
+    <!-- Organizations -->
+    <IOC rdf:ID="IOC">
+        <foaf:name>Международный олимпийский комитет</foaf:name>
+        <skos:member rdf:resource="#ThomasBach"/>
+    </IOC>
+
+    <NationalCommittee rdf:ID="USOC">
+        <foaf:name>Олимпийский комитет США</foaf:name>
+    </NationalCommittee>
+
+    <!-- Problems -->
+    <DopingScandal rdf:ID="LanceArmstrongCase">
+        <skos:note xml:lang="ru">Лишение 7 побед в Тур де Франс</skos:note>
+    </DopingScandal>
+
+    <PoliticalConflict rdf:ID="Berlin1936">
+        <skos:note xml:lang="ru">Пропаганда нацистского режима</skos:note>
+    </PoliticalConflict>
+
+    <!-- Sport Disciplines -->
+    <SummerSport rdf:ID="Swimming">
+        <skos:prefLabel xml:lang="ru">Плавание</skos:prefLabel>
+        <skos:inScheme rdf:resource="#SportCategories"/>
+    </SummerSport>
+
+    <WinterSport rdf:ID="FigureSkating">
+        <skos:prefLabel xml:lang="ru">Фигурное катание</skos:prefLabel>
+    </WinterSport>
+
+    <NewSport rdf:ID="Skateboarding">
+        <skos:prefLabel xml:lang="ru">Скейтбординг</skos:prefLabel>
+        <skos:inScheme rdf:resource="#SportCategories"/>
+    </NewSport>
+
+    <!-- Ceremonies -->
+    <OpeningCeremony rdf:ID="TokyoOpening2021">
+        <skos:note xml:lang="ru">Церемония с элементами японской культуры</skos:note>
+    </OpeningCeremony>
+
+    <!-- Olympic Records -->
+    <OlympicRecord rdf:ID="MostGoldMedals">
+        <recordType>Наибольшее количество золотых медалей</recordType>
+        <skos:definition xml:lang="ru">23 золотые медали в карьере</skos:definition>
+    </OlympicRecord>
+
+    <!-- SKOS Concepts -->
+    <skos:ConceptScheme rdf:ID="SportCategories">
+        <skos:prefLabel xml:lang="ru">Категории спортивных дисциплин</skos:prefLabel>
+    </skos:ConceptScheme>
+
+    <skos:Concept rdf:ID="AquaticSports">
+        <skos:prefLabel xml:lang="ru">Водные виды спорта</skos:prefLabel>
+        <skos:narrower rdf:resource="#Swimming"/>
+    </skos:Concept>
+
+    <!-- FOAF Persons -->
+    <foaf:Person rdf:ID="PierreDeCoubertin">
+        <foaf:name>Пьер де Кубертен</foaf:name>
+        <skos:note xml:lang="ru">Основатель современных Олимпийских игр</skos:note>
+    </foaf:Person>
+
+    <foaf:Person rdf:ID="ThomasBach">
+        <foaf:name>Томас Бах</foaf:name>
+        <skos:note xml:lang="ru">Президент МОК с 2013 года</skos:note>
+    </foaf:Person>
+
+    <WinterOlympics rdf:ID="SaltLake2002">
+        <year>2002</year>
+        <hostedBy rdf:resource="#USA"/>
+        <hasProblem rdf:resource="#LanceArmstrongCase"/>
+    </WinterOlympics>
+
+</rdf:RDF>
